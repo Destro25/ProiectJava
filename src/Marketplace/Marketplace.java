@@ -1,5 +1,6 @@
 package Marketplace;
 
+import Customer.Customer;
 import Products.*;
 import Collection.*;
 
@@ -15,6 +16,7 @@ public class Marketplace {
 
     private Float profitMade;
 
+    public Set<Customer> customers = new HashSet<Customer>();
     public List<Product> productsForPurchase = new ArrayList<Product>();
 
     public Set<SkinCollection> skinCollections = new HashSet<SkinCollection>();

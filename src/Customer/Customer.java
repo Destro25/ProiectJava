@@ -6,6 +6,7 @@ import Marketplace.Marketplace;
 import Products.*;
 
 import java.util.ArrayList;
+import java.util.Objects;
 import java.util.Random;
 
 
@@ -13,15 +14,16 @@ public class Customer {
     private static Integer uniqueAccId = 1;
     private Integer accountId;
     private String email;
-    private String password;
+
+    private String accountName;
     private Float balance = 0.0F;
 
     private ArrayList<Product> productsInventory = new ArrayList<Product>();
 
-    public Customer(String email, String password) {
+    public Customer(String email, String accountName) {
         this.accountId = uniqueAccId++;
         this.email = email;
-        this.password = password;
+        this.accountName = accountName;
     }
 
     public void depositProduct(Product p){
@@ -34,8 +36,8 @@ public class Customer {
         m.addToMarket(p);
     }
 
-    public Integer getAccountId() {
-        return accountId;
+    public String getEmail() {
+        return email;
     }
 
     public void createCollection(String collectionName, String machineGunSkin, float floatCapMachineGunSkin, String shotgunSkin, float floatCapShotgunSkin, String smgSkin, float floatCapSmgSkin, String pistolSkin, float floatCapPistolSkin, String sniperRifleSkin, float floatCapSniperRifleSkin, String rifleSkin, float floatCapRifleSkin, String knifeSkin, float floatCapKnifeSkin, Marketplace m)
@@ -103,5 +105,18 @@ public class Customer {
                 i++;
             }
         }
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Customer customer = (Customer) o;
+        return Objects.equals(email, customer.email);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(email);
     }
 }
