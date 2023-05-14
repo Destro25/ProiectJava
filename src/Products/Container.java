@@ -21,9 +21,9 @@ public class Container extends Product{
 
     public SkinCollection skinCollection;
 
-    public Container(Integer ownerId, String containerName, SkinCollection skinCollection) {
+    public Container(Integer ownerId, SkinCollection skinCollection) {
         super(ownerId);
-        this.containerName = containerName;
+        this.containerName = skinCollection.collectionName + "Case";
         this.skinCollection = skinCollection;
     }
 

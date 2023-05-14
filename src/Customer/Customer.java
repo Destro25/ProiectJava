@@ -1,12 +1,13 @@
 package Customer;
 
+import Collection.GraffitiSet;
 import Collection.SkinCollection;
 import Marketplace.Marketplace;
 import Products.*;
 
 import java.util.ArrayList;
-import java.util.List;
-import java.util.Timer;
+import java.util.Random;
+
 
 public class Customer {
     private static Integer uniqueAccId = 1;
@@ -43,7 +44,11 @@ public class Customer {
         m.marketCollection(c);
     }
 
-
+    public void createGraffitiSet(String graffitiSetName, String support, Integer numberOfUsesSupport, String leader, Integer numberOfUsesLeader, String ninja, Integer numberOfUsesNinja, String fragger, Integer numberOfUsesFragger, String bot, Integer numberOfUsesBot, Marketplace m)
+    {
+        GraffitiSet g = new GraffitiSet(graffitiSetName, accountId, support, numberOfUsesSupport, leader, numberOfUsesLeader, ninja, numberOfUsesNinja, fragger, numberOfUsesFragger, bot, numberOfUsesBot);
+        m.marketGraffitiSet(g);
+    }
     public void showInventory(){
         System.out.println(productsInventory);
     }
@@ -58,8 +63,45 @@ public class Customer {
         balance = balance - Balance;
     }
 
-    public void playTheGame()
+    public void playAGame(Marketplace m)
     {
+        long start = System.nanoTime();
 
+        while (System.nanoTime() - start < 500000000L) {}
+
+        float rand = (float) Math.random();
+
+        if (rand < 0.2f)
+        {
+            int size = m.skinCollections.size();
+            int item = new Random().nextInt(size);
+            int i = 0;
+            for(SkinCollection s : m.skinCollections)
+            {
+                if(i == item)
+                {
+                    Container c = new Container(accountId, s);
+                    productsInventory.add(c);
+                    break;
+                }
+                i++;
+            }
+        }
+        else
+        {
+            int size = m.graffitiSets.size();
+            int item = new Random().nextInt(size);
+            int i = 0;
+            for(GraffitiSet g : m.graffitiSets)
+            {
+                if(i == item)
+                {
+                    Graffiti c = new Graffiti(accountId, g);
+                    productsInventory.add(c);
+                    break;
+                }
+                i++;
+            }
+        }
     }
 }

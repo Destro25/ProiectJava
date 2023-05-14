@@ -21,7 +21,7 @@ public class GraffitiSet {
 
     public String Fragger;
 
-    public Integer NumberOfUsesFragger;
+    public Integer numberOfUsesFragger;
 
     public String Bot;
 
@@ -37,7 +37,7 @@ public class GraffitiSet {
         Ninja = ninja;
         this.numberOfUsesNinja = numberOfUsesNinja;
         Fragger = fragger;
-        NumberOfUsesFragger = numberOfUsesFragger;
+        this.numberOfUsesFragger = numberOfUsesFragger;
         Bot = bot;
         this.numberOfUsesBot = numberOfUsesBot;
     }

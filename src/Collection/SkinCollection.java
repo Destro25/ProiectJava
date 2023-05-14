@@ -55,9 +55,6 @@ public class SkinCollection {
         this.floatCapKnifeSkin = floatCapKnifeSkin;
     }
 
-    public String getCollectionName() {
-        return collectionName;
-    }
 
     @Override
     public boolean equals(Object o) {
