@@ -1,7 +1,7 @@
 package Marketplace;
 
 import Products.*;
-import Collection.SkinCollection;
+import Collection.*;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -19,6 +19,8 @@ public class Marketplace {
 
     public Set<SkinCollection> skinCollections = new HashSet<SkinCollection>();
 
+    public Set<GraffitiSet> graffitiSets = new HashSet<GraffitiSet>();
+
     public void addToMarket(Product p){
         productsForPurchase.add(p);
     }
@@ -26,6 +28,8 @@ public class Marketplace {
     public void marketCollection(SkinCollection c){
         skinCollections.add(c);
     }
+
+    public void marketGraffitiSet(GraffitiSet g) {graffitiSets.add(g); }
 
     private static synchronized Marketplace getInstance()
     {

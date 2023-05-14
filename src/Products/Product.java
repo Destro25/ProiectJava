@@ -1,6 +1,5 @@
 package Products;
 
-import Collection.SkinCollection;
 
 public class Product {
     private static Integer uniquePrdId = 1;
@@ -8,14 +7,11 @@ public class Product {
 
     public Integer ownerId;
 
-    public SkinCollection skinCollection;
-
     public Float Price;
 
-    public Product(Integer ownerId, SkinCollection skinCollection) {
+    protected Product(Integer ownerId) {
         this.productId = uniquePrdId++;
         this.ownerId = ownerId;
-        this.skinCollection = skinCollection;
     }
 
     public Integer getOwnerId() {
@@ -26,9 +22,6 @@ public class Product {
         this.ownerId = ownerId;
     }
 
-    public SkinCollection getSkinCollection() {
-        return skinCollection;
-    }
 
 
     public Float getPrice() {
@@ -38,4 +31,6 @@ public class Product {
     public void setPrice(Float price) {
         Price = price;
     }
+
+
 }

@@ -6,6 +6,7 @@ import Products.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Timer;
 
 public class Customer {
     private static Integer uniqueAccId = 1;
@@ -14,7 +15,7 @@ public class Customer {
     private String password;
     private Float balance = 0.0F;
 
-    private List<Product> productsInventory = new ArrayList<Product>();
+    private ArrayList<Product> productsInventory = new ArrayList<Product>();
 
     public Customer(String email, String password) {
         this.accountId = uniqueAccId++;
@@ -45,5 +46,20 @@ public class Customer {
 
     public void showInventory(){
         System.out.println(productsInventory);
+    }
+
+    public void addBalance(float Balance)
+    {
+        balance = balance + Balance;
+    }
+
+    public void withdrawBalance(float Balance)
+    {
+        balance = balance - Balance;
+    }
+
+    public void playTheGame()
+    {
+
     }
 }

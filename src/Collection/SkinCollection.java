@@ -1,10 +1,9 @@
 package Collection;
 
 
-public class SkinCollection {
-    private static Integer uniqueColId = 1;
+import java.util.Objects;
 
-    public Integer collectionId;
+public class SkinCollection {
 
     public String collectionName;
     public Integer creatorId;
@@ -38,7 +37,6 @@ public class SkinCollection {
     public float floatCapKnifeSkin;
 
     public SkinCollection(String collectionName, Integer creatorId, String machineGunSkin, float floatCapMachineGunSkin, String shotgunSkin, float floatCapShotgunSkin, String smgSkin, float floatCapSmgSkin, String pistolSkin, float floatCapPistolSkin, String sniperRifleSkin, float floatCapSniperRifleSkin, String rifleSkin, float floatCapRifleSkin, String knifeSkin, float floatCapKnifeSkin) {
-        this.collectionId = uniqueColId++;
         this.collectionName = collectionName;
         this.creatorId = creatorId;
         this.machineGunSkin = machineGunSkin;
@@ -59,5 +57,18 @@ public class SkinCollection {
 
     public String getCollectionName() {
         return collectionName;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        SkinCollection that = (SkinCollection) o;
+        return Objects.equals(collectionName, that.collectionName);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(collectionName);
     }
 }

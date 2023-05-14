@@ -9,10 +9,13 @@ public class Skin extends Product{
     public String finish;
     public Float skinFloat;
 
-    public Skin(Integer ownerId, SkinCollection collection, Weapon weapon, String finish, Float skinFloat) {
-        super(ownerId, collection);
+    public SkinCollection skinCollection;
+
+    public Skin(Integer ownerId, Weapon weapon, String finish, Float skinFloat, SkinCollection skinCollection) {
+        super(ownerId);
         this.weapon = weapon;
         this.finish = finish;
         this.skinFloat = skinFloat;
+        this.skinCollection = skinCollection;
     }
 }
