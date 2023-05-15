@@ -68,4 +68,12 @@ public class SkinCollection {
     public int hashCode() {
         return Objects.hash(collectionName);
     }
+
+    @Override
+    public String toString() {
+        return "SkinCollection{" +
+                "collectionName='" + collectionName + '\'' +
+                ", creatorId=" + creatorId +
+                '}';
+    }
 }

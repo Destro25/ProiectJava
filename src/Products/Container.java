@@ -23,7 +23,7 @@ public class Container extends Product{
 
     public Container(Integer ownerId, SkinCollection skinCollection) {
         super(ownerId);
-        this.containerName = skinCollection.collectionName + "Case";
+        this.containerName = skinCollection.collectionName + " Case";
         this.skinCollection = skinCollection;
     }
 
@@ -47,5 +47,14 @@ public class Container extends Product{
             s = new Skin(ownerId, Weapon.machineGun, skinCollection.machineGunSkin, (float) (Math.random() * skinCollection.floatCapMachineGunSkin), this.skinCollection);
         }
         return s;
+    }
+
+    @Override
+    public String toString() {
+        return "Container{" +
+                "productId=" + productId +
+                ", containerName='" + containerName + '\'' +
+                ", skinCollection=" + skinCollection +
+                '}';
     }
 }

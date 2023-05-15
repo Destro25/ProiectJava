@@ -3,7 +3,7 @@ package Products;
 
 public class Product {
     private static Integer uniquePrdId = 1;
-    private Integer productId;
+    protected Integer productId;
 
     public Integer ownerId;
 
@@ -22,7 +22,13 @@ public class Product {
         this.ownerId = ownerId;
     }
 
+    public Integer getProductId() {
+        return productId;
+    }
 
+    public static Integer getUniquePrdId() {
+        return uniquePrdId;
+    }
 
     public Float getPrice() {
         return Price;

@@ -26,6 +26,10 @@ public class Customer {
         this.accountName = accountName;
     }
 
+    public void setBalance(Float balance) {
+        this.balance = balance;
+    }
+
     public void depositProduct(Product p){
         productsInventory.add(p);
     }
@@ -38,6 +42,16 @@ public class Customer {
 
     public String getEmail() {
         return email;
+    }
+
+    public String getAccountName() {return accountName; }
+
+    public Integer getAccountId() {return  accountId; }
+
+    public Float getBalance() {return balance; }
+
+    public ArrayList<Product> getProductsInventory() {
+        return productsInventory;
     }
 
     public void createCollection(String collectionName, String machineGunSkin, float floatCapMachineGunSkin, String shotgunSkin, float floatCapShotgunSkin, String smgSkin, float floatCapSmgSkin, String pistolSkin, float floatCapPistolSkin, String sniperRifleSkin, float floatCapSniperRifleSkin, String rifleSkin, float floatCapRifleSkin, String knifeSkin, float floatCapKnifeSkin, Marketplace m)
@@ -107,6 +121,21 @@ public class Customer {
         }
     }
 
+    public void addASkin(Skin s)
+    {
+        productsInventory.add(s);
+    }
+
+    public void removeProduct(Integer id)
+    {
+        for(int i = 0; i < productsInventory.size(); i++)
+        {
+            if(productsInventory.get(i).getProductId().equals(id))
+            {
+                productsInventory.remove(productsInventory.get(i));
+            }
+        }
+    }
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

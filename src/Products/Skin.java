@@ -18,4 +18,14 @@ public class Skin extends Product{
         this.skinFloat = skinFloat;
         this.skinCollection = skinCollection;
     }
+
+    @Override
+    public String toString() {
+        return "Skin{" +
+                "weapon=" + weapon +
+                ", finish='" + finish + '\'' +
+                ", skinFloat=" + skinFloat +
+                ", skinCollection=" + skinCollection +
+                '}';
+    }
 }
