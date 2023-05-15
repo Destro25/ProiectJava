@@ -1,7 +1,7 @@
 package Products;
 
 
-public class Product {
+public class Product implements Comparable<Product>{
     private static Integer uniquePrdId = 1;
     protected Integer productId;
 
@@ -39,4 +39,8 @@ public class Product {
     }
 
 
+    @Override
+    public int compareTo(Product o) {
+        return this.Price.compareTo(o.getPrice());
+    }
 }

@@ -18,7 +18,7 @@ public class Main {
         Marketplace m = new Marketplace();
 
         Customer c1 = new Customer("0", "0");
-        c1.createCollection("Anubis",  "Steel Delta", 0.8f, "sg", 0.9f, "ScaraB Rush", 0.9f, "Ramese's Reach", 1.0f, "Black Nile", 0.5f, "Eye of Horus", 0.3f, "Scepter of Ra", 0.01f, m);
+        c1.createCollection("Anubis",  "Steel Delta", 0.8f, "Sobek's Bite", 0.9f, "ScaraB Rush", 0.9f, "Ramese's Reach", 1.0f, "Black Nile", 0.5f, "Eye of Horus", 0.3f, "Scepter of Ra", 0.01f, m);
         c1.createGraffitiSet("Vertigo", "Defused", 100, "Info Giver", 50, "Smoked out", 150, "Entry Man", 100, "Maxed Out", 30, m);
 
 
