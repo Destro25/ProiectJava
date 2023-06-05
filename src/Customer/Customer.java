@@ -54,6 +54,11 @@ public class Customer {
         return productsInventory;
     }
 
+    public void addAProduct(Product p)
+    {
+        productsInventory.add(p);
+    }
+
     public void createCollection(String collectionName, String machineGunSkin, float floatCapMachineGunSkin, String shotgunSkin, float floatCapShotgunSkin, String smgSkin, float floatCapSmgSkin, String pistolSkin, float floatCapPistolSkin, String sniperRifleSkin, float floatCapSniperRifleSkin, String rifleSkin, float floatCapRifleSkin, String knifeSkin, float floatCapKnifeSkin, Marketplace m)
     {
         SkinCollection c = new SkinCollection(collectionName, accountId, machineGunSkin, floatCapMachineGunSkin, shotgunSkin, floatCapShotgunSkin, smgSkin, floatCapSmgSkin, pistolSkin, floatCapPistolSkin, sniperRifleSkin, floatCapSniperRifleSkin, rifleSkin, floatCapRifleSkin, knifeSkin, floatCapKnifeSkin);

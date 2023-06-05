@@ -4,29 +4,27 @@ import Marketplace.*;
 import Products.*;
 import Collection.SkinCollection;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
 import java.sql.SQLOutput;
+import java.util.Collections;
 import java.util.Objects;
 import java.util.Scanner;
 
 
 public class Main {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws SQLException {
         Scanner scanner = new Scanner(System.in);
         String command;
 
+        Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/proiect", "root", "root");
 
         Marketplace m = new Marketplace();
 
         Customer c1 = new Customer("0", "0");
         c1.createCollection("Anubis",  "Steel Delta", 0.8f, "Sobek's Bite", 0.9f, "ScaraB Rush", 0.9f, "Ramese's Reach", 1.0f, "Black Nile", 0.5f, "Eye of Horus", 0.3f, "Scepter of Ra", 0.01f, m);
         c1.createGraffitiSet("Vertigo", "Defused", 100, "Info Giver", 50, "Smoked out", 150, "Entry Man", 100, "Maxed Out", 30, m);
-
-
-        //m.showMarketplace();
-        //c1.showInventory();
-        //System.out.println(c1.getAccountId());
-
-        //System.out.println(m.skinCollections);
 
         String currentCust = "";
         Integer accountId = 0;
@@ -375,6 +373,105 @@ public class Main {
                                 }
                             }
                         }
+                    }else
+                    {
+                        System.out.println("Please create an account, or login!");
+                    }
+                    break;
+                case "8":
+                    if(accountId!=0)
+                    {
+                        for(Customer c : m.customers)
+                        {
+                            if(c.getAccountId()==accountId)
+                            {
+                                for(Product p : c.getProductsInventory())
+                                {
+                                    System.out.println(p);
+                                }
+                                System.out.println("Those are the items you have in your inventory!");
+                                System.out.println("Please select an id of an item you would like to sell, or 0 to go back.");
+
+                                Integer id = Integer.parseInt(scanner.next());
+
+                                if (id != 0)
+                                {
+                                    System.out.println("The creator of the collection will get 7% of the asking price, and the market will get 3%.");
+                                    System.out.println("Choose a price for the item: ");
+                                    Float pret = Float.parseFloat(scanner.next());
+
+                                    Product prd = null;
+
+                                    for(Product p : c.getProductsInventory())
+                                    {
+                                        if (p.getProductId() == id)
+                                        {
+                                            prd = p;
+                                        }
+                                    }
+
+                                    prd.setPrice(pret);
+                                    m.addToMarket(prd);
+                                    c.removeProduct(id);
+                                }
+                            }
+                        }
+                    }else
+                    {
+                        System.out.println("Please create an account, or login!");
+                    }
+                    break;
+                case "9":
+                    if(accountId!=0)
+                    {
+                        Collections.sort(m.productsForPurchase);
+                            for(Customer c : m.customers)
+                            {
+                                if (c.getAccountId() == accountId)
+                                {
+                                    for(Product p : m.productsForPurchase)
+                                    {
+                                        System.out.println(p + " cost: " + p.getPrice().toString());
+                                        System.out.println("Please choose the id of the item you would like to buy, or 0 to go back: ");
+                                    }
+                                    Integer id = Integer.parseInt(scanner.next());
+                                    Product prd = null;
+
+                                    if (id != 0)
+                                    {
+                                        for(Product p : m.productsForPurchase)
+                                        {
+                                            if (p.getProductId() == id)
+                                            {
+                                                prd = p;
+                                            }
+                                        }
+
+                                        if(c.getBalance() > prd.getPrice())
+                                        {
+                                            c.setBalance(c.getBalance()-prd.getPrice());
+                                            m.addProfit(0.03f * prd.getPrice());
+
+                                            Customer own = m.findCustById(prd.ownerId);
+                                            own.setBalance(own.getBalance() + 0.9f * prd.getPrice());
+
+                                            Customer desig = m.findCustById(m.findDesignerIdByProductId(prd.getProductId()));
+                                            desig.setBalance(desig.getBalance() + 0.07f * prd.getPrice());
+
+                                            prd.setOwnerId(c.getAccountId());
+                                            c.addAProduct(prd);
+
+                                            m.removeItemFromMarket(prd);
+                                            System.out.println("Exchange finnalized!");
+                                        }
+                                        else
+                                        {
+                                            System.out.println("Insufficient funds! ");
+                                        }
+                                    }
+                                }
+                            }
+
                     }else
                     {
                         System.out.println("Please create an account, or login!");

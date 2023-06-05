@@ -54,4 +54,12 @@ public class GraffitiSet {
     public int hashCode() {
         return Objects.hash(graffitiSetName);
     }
+
+    @Override
+    public String toString() {
+        return "GraffitiSet{" +
+                "graffitiSetName='" + graffitiSetName + '\'' +
+                ", creatorId=" + creatorId +
+                '}';
+    }
 }

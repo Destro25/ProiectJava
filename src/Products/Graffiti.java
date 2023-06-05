@@ -30,4 +30,13 @@ public class Graffiti extends Product{
         }
     }
 
+    @Override
+    public String toString() {
+        return "Graffiti{" +
+                "productId=" + productId +
+                ", numberOfUses=" + numberOfUses +
+                ", graffitiSet=" + graffitiSet +
+                ", graffitiName='" + graffitiName + '\'' +
+                '}';
+    }
 }
