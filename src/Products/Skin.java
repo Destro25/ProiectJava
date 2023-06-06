@@ -22,7 +22,8 @@ public class Skin extends Product{
     @Override
     public String toString() {
         return "Skin{" +
-                "weapon=" + weapon +
+                "productId=" + productId +
+                ", weapon=" + weapon +
                 ", finish='" + finish + '\'' +
                 ", skinFloat=" + skinFloat +
                 ", skinCollection=" + skinCollection +
