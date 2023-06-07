@@ -2,6 +2,7 @@ import java.io.*;
 import java.sql.SQLException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Objects;
 import java.util.Scanner;
 
 
@@ -112,27 +113,37 @@ public class Main {
                     }
                 }
                 case "3" -> {
-                    if (service.getAccountId() != 0) {
+                    if (service.getAccountId() != 0)
+                    {
                         System.out.println("Your balance is: " + service.getAccountBalance());
                         System.out.println("If you would like to deposit choose 1. ");
                         System.out.println("If you would like to withdraw choose 2. ");
                         String depwith = scanner.next();
 
-                        System.out.println("Introduce the sum you would like to deposit or withdraw: ");
-                        String dep = scanner.next();
+                        if(Objects.equals(depwith, "1") || Objects.equals(depwith, "2"))
+                        {
+                            {
+                                System.out.println("Introduce the sum you would like to deposit or withdraw: ");
+                                String dep = scanner.next();
 
-                        try {
-                            if (Integer.parseInt(dep) >= 0) {
-                                service.addOrWithdraw(depwith, dep);
-                                out.write("Operatiune 3" + " " + LocalDateTime.now().format(formatter) + "\n");
-                                out.flush();
-                            } else {
-                                System.out.println("You cannot introduce negative balance!");
+                                try {
+                                    if (Integer.parseInt(dep) >= 0) {
+                                        service.addOrWithdraw(depwith, dep);
+                                        out.write("Operatiune 3" + " " + LocalDateTime.now().format(formatter) + "\n");
+                                        out.flush();
+                                    } else {
+                                        System.out.println("You cannot introduce negative balance!");
+                                    }
+                                } catch (RuntimeException e) {
+                                    System.out.println("Invalid sum!");
+                                }
                             }
-                        } catch (RuntimeException e) {
-                            System.out.println("Invalid sum!");
+                        }else
+                        {
+                            System.out.println("Command not recognized. Returning to main menu.");
                         }
-                    } else {
+                    }
+                    else {
                         System.out.println("Please create an account, or login!");
                     }
                 }
