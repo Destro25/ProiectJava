@@ -84,9 +84,11 @@ public class Customer {
         balance = balance - Balance;
     }
 
-    public void playAGame(Marketplace m)
+    public Product playAGame(Marketplace m)
     {
         long start = System.nanoTime();
+
+        Product p = null;
 
         while (System.nanoTime() - start < 500000000L) {}
 
@@ -104,6 +106,7 @@ public class Customer {
                     Container c = new Container(accountId, s);
                     System.out.println("Congratulations! You got " + c);
                     productsInventory.add(c);
+                    p = c;
                     break;
                 }
                 i++;
@@ -120,12 +123,14 @@ public class Customer {
                 {
                     Graffiti c = new Graffiti(accountId, g);
                     System.out.println("Congratulations! You got " + c);
+                    p = c;
                     productsInventory.add(c);
                     break;
                 }
                 i++;
             }
         }
+        return p;
     }
 
     public void addASkin(Skin s)

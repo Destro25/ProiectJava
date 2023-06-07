@@ -1,12 +1,17 @@
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.util.Scanner;
 
 
 public class Main {
-    public static void main(String[] args) throws SQLException {
+    public static void main(String[] args) throws SQLException, FileNotFoundException {
         Scanner scanner = new Scanner(System.in);
         String command;
-
+        File csvFile = new File("audit.csv");
+        PrintWriter out = new PrintWriter(csvFile);
         Service service = Service.getInstance();
 
         System.out.println("The available commands are:");
@@ -72,6 +77,7 @@ public class Main {
                         try {
                             service.checkForEmail(email);
                             service.addACustomer(email, name);
+                            out.printf("%s, %s\n", "Operatiune 1", new Timestamp(System.currentTimeMillis()));
                         } catch (RuntimeException e) {
                             System.out.println("There is already an account created with this email!");
                         }
@@ -93,7 +99,7 @@ public class Main {
                     if (service.getCurrentCust().equals("")) {
                         System.out.println("Email: ");
                         String email = scanner.next();
-
+                        out.printf("%s, %s\n", "Operatiune 2", new Timestamp(System.currentTimeMillis()));
                         service.login(email);
                     } else {
                         service.logout();
@@ -112,6 +118,7 @@ public class Main {
                         try {
                             if (Integer.parseInt(dep) >= 0) {
                                 service.addOrWithdraw(depwith, dep);
+                                out.printf("%s, %s\n", "Operatiune 3", new Timestamp(System.currentTimeMillis()));
                             } else {
                                 System.out.println("You cannot introduce negative balance!");
                             }
@@ -133,6 +140,7 @@ public class Main {
                                 System.out.println("Insufficient funds!");
                             } else {
                                 try {
+
                                     System.out.println("Please choose a collection name: ");
                                     String collectionName = scanner.next();
 
@@ -181,7 +189,7 @@ public class Main {
                                     if (floatCapMachineGunSkin < 0f || floatCapShotgunSkin < 0f || floatCapSmgSkin < 0f || floatCapPistolSkin < 0f || floatCapSniperRifleSkin < 0f || floatCapRifleSkin < 0f || floatCapKnifeSkin < 0f) {
                                         throw new RuntimeException();
                                     }
-
+                                    out.printf("%s, %s\n", "Operatiune 4", new Timestamp(System.currentTimeMillis()));
                                     service.createASkinCollection(collectionName, machineGunSkin, floatCapMachineGunSkin, shotgunSkin, floatCapShotgunSkin, smgSkin, floatCapSmgSkin, pistolSkin, floatCapPistolSkin, sniperRifleSkin, floatCapSniperRifleSkin, rifleSkin, floatCapRifleSkin, knifeSkin, floatCapKnifeSkin);
                                 } catch (RuntimeException e) {
                                     System.out.println("The float value introduced was not valid!");
@@ -239,7 +247,7 @@ public class Main {
                                     if (numberOfUsesBot < 0 || numberOfUsesFragger < 0 || numberOfUsesLeader < 0 || numberOfUsesNinja < 0 || numberOfUsesSupport < 0) {
                                         throw new RuntimeException();
                                     }
-
+                                    out.printf("%s, %s\n", "Operatiune 5", new Timestamp(System.currentTimeMillis()));
                                     service.createAGraffitiSet(graffitiSetName, support, numberOfUsesSupport, leader, numberOfUsesLeader, ninja, numberOfUsesNinja, fragger, numberOfUsesFragger, bot, numberOfUsesBot);
                                 } catch (RuntimeException e) {
                                     System.out.println("The number of uses introduced are invalid!");
@@ -252,6 +260,7 @@ public class Main {
                 }
                 case "6" -> {
                     if (service.getAccountId() != 0) {
+                        out.printf("%s, %s\n", "Operatiune 6", new Timestamp(System.currentTimeMillis()));
                         service.playAccountGame();
                     } else {
                         System.out.println("Please create an account, or login!");
@@ -266,6 +275,7 @@ public class Main {
                             try {
                                 Integer id = Integer.parseInt(scanner.next());
                                 service.accountOpenContainer(id);
+                                out.printf("%s, %s\n", "Operatiune 7", new Timestamp(System.currentTimeMillis()));
                             } catch (RuntimeException e) {
                                 System.out.println("The container Id introduced is not valid!");
                             }
@@ -293,6 +303,7 @@ public class Main {
 
                                 if (pret > 0f) {
                                     service.sellAccountProduct(id, pret);
+                                    out.printf("%s, %s\n", "Operatiune 8", new Timestamp(System.currentTimeMillis()));
                                 } else {
                                     System.out.println("The price cannot be negative!");
                                 }
@@ -312,6 +323,7 @@ public class Main {
                         try {
                             Integer id = Integer.parseInt(scanner.next());
                             service.buyTheItem(id);
+                            out.printf("%s, %s\n", "Operatiune 9", new Timestamp(System.currentTimeMillis()));
                         } catch (RuntimeException e) {
                             System.out.println("The id you introduced is invalid!");
                         }
@@ -322,6 +334,7 @@ public class Main {
                 case "10" -> {
                     if (service.getAccountId() == 0) {
                         service.showTheCustomers();
+                        out.printf("%s, %s\n", "Operatiune 10", new Timestamp(System.currentTimeMillis()));
                     } else {
                         command = "12";
                     }
@@ -334,5 +347,6 @@ public class Main {
         scanner.close();
         System.out.println("Goodbye!");
         System.out.println("Profit made: " + service.profidMade());
+        out.close();
     }
 }

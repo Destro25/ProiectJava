@@ -57,4 +57,8 @@ public class Container extends Product{
                 ", skinCollection=" + skinCollection +
                 '}';
     }
+
+    public String getContainerName() {
+        return containerName;
+    }
 }

@@ -39,4 +39,12 @@ public class Graffiti extends Product{
                 ", graffitiName='" + graffitiName + '\'' +
                 '}';
     }
+
+    public String getGraffitiName() {
+        return graffitiName;
+    }
+
+    public Integer getNumberOfUses() {
+        return numberOfUses;
+    }
 }

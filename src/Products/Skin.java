@@ -29,4 +29,16 @@ public class Skin extends Product{
                 ", skinCollection=" + skinCollection +
                 '}';
     }
+
+    public Weapon getWeapon() {
+        return weapon;
+    }
+
+    public String getFinish() {
+        return finish;
+    }
+
+    public Float getSkinFloat() {
+        return skinFloat;
+    }
 }
