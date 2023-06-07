@@ -402,6 +402,7 @@ public class Service {
                                 System.out.println(ex.getMessage());
                             }
 
+                            m.addProfit(2f);
                             c.addASkin(s);
                             c.removeProduct(id);
                             float newbal = c.getBalance()-2f;
