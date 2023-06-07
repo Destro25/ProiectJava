@@ -102,6 +102,7 @@ public class Customer {
                 if(i == item)
                 {
                     Container c = new Container(accountId, s);
+                    System.out.println("Congratulations! You got " + c);
                     productsInventory.add(c);
                     break;
                 }
@@ -118,6 +119,7 @@ public class Customer {
                 if(i == item)
                 {
                     Graffiti c = new Graffiti(accountId, g);
+                    System.out.println("Congratulations! You got " + c);
                     productsInventory.add(c);
                     break;
                 }
@@ -141,16 +143,32 @@ public class Customer {
             }
         }
     }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
+
         Customer customer = (Customer) o;
-        return Objects.equals(email, customer.email);
+
+        if (!accountId.equals(customer.accountId)) return false;
+        return email.equals(customer.email);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(email);
+        int result = accountId.hashCode();
+        result = 31 * result + email.hashCode();
+        return result;
+    }
+
+    @Override
+    public String toString() {
+        return "Customer{" +
+                "accountId=" + accountId +
+                ", email='" + email + '\'' +
+                ", accountName='" + accountName + '\'' +
+                ", balance=" + balance +
+                '}';
     }
 }

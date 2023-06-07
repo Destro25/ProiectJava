@@ -62,6 +62,19 @@ public class Marketplace {
         return cus;
     }
 
+    public String findCustEmailById(Integer id)
+    {
+        Customer cus = null;
+        for(Customer c : customers)
+        {
+            if (c.getAccountId() == id)
+            {
+                cus = c;
+            }
+        }
+        return cus.getEmail();
+    }
+
     public Integer findDesignerIdByProductId(Integer id)
     {
         Integer idus = 0;
@@ -85,5 +98,9 @@ public class Marketplace {
     public void removeItemFromMarket(Product p)
     {
         productsForPurchase.remove(p);
+    }
+
+    public Float getProfitMade() {
+        return profitMade;
     }
 }

@@ -76,4 +76,8 @@ public class SkinCollection {
                 ", creatorId=" + creatorId +
                 '}';
     }
+
+    public void setCreatorId(Integer creatorId) {
+        this.creatorId = creatorId;
+    }
 }

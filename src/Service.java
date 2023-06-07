@@ -67,10 +67,52 @@ public class Service {
         m.customers.add(t);
     }
 
+    public Integer testEmail(Integer id, String email)
+    {
+        if(!m.findCustEmailById(id).equals(email))
+        {
+            throw new RuntimeException();
+        }
+        return 5;
+    }
     public void removeACustomer(String email)
     {
         Customer temp = new Customer(email, currentCust);
+
+        for(Customer c : m.customers)
+        {
+            if (c == temp)
+            {
+                if(c.getProductsInventory().size()>0)
+                {
+                    for(Product p : c.getProductsInventory())
+                    {
+                        p.setOwnerId(1);
+                    }
+                }
+            }
+        }
+
+        for(SkinCollection s : m.skinCollections)
+        {
+            if(s.creatorId == accountId)
+            {
+                s.setCreatorId(1);
+            }
+        }
+
+        for(GraffitiSet g : m.graffitiSets)
+        {
+            if(g.creatorId == accountId)
+            {
+                g.setCreatorId(1);
+            }
+        }
+
         m.customers.remove(temp);
+        currentCust = "";
+        accountId = 0;
+        System.out.println("Your account was succesfully deleted!");
     }
 
     public void login(String email)
@@ -324,6 +366,20 @@ public class Service {
     public void showTheCustomers()
     {
         System.out.println(m.customers);
+    }
+
+    public void checkForEmail(String email)
+    {
+        for(Customer c : m.customers)
+        {
+            if(c.getEmail().equals(email))
+                throw new RuntimeException();
+        }
+    }
+
+    public Float profidMade()
+    {
+        return m.getProfitMade();
     }
 }
 

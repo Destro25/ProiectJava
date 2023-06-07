@@ -62,4 +62,8 @@ public class GraffitiSet {
                 ", creatorId=" + creatorId +
                 '}';
     }
+
+    public void setCreatorId(Integer creatorId) {
+        this.creatorId = creatorId;
+    }
 }
