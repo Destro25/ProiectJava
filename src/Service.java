@@ -103,17 +103,27 @@ public class Service {
 
         for(Customer c : m.customers)
         {
-            if (c == temp)
+            if (c.equals(temp))
             {
                 if(c.getProductsInventory().size()>0)
                 {
                     for(Product p : c.getProductsInventory())
                     {
                         p.setOwnerId(1);
+                        String SQLquery = "UPDATE PRODUCT set ownerId = "+ 1 + " WHERE productId = "+p.getProductId()+";";
+                        try
+                        {
+                            statement.executeUpdate(SQLquery);
+                        }
+                        catch (SQLException ex)
+                        {
+                            System.out.println(ex.getMessage());
+                        }
                     }
                 }
             }
         }
+
 
         for(SkinCollection s : m.skinCollections)
         {

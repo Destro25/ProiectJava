@@ -156,15 +156,12 @@ public class Customer {
 
         Customer customer = (Customer) o;
 
-        if (!accountId.equals(customer.accountId)) return false;
         return email.equals(customer.email);
     }
 
     @Override
     public int hashCode() {
-        int result = accountId.hashCode();
-        result = 31 * result + email.hashCode();
-        return result;
+        return email.hashCode();
     }
 
     @Override

@@ -1,6 +1,5 @@
 import java.io.*;
 import java.sql.SQLException;
-import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
@@ -108,6 +107,8 @@ public class Main {
                         service.login(email);
                     } else {
                         service.logout();
+                        out.write("Operatiune 2" + " " + LocalDateTime.now().format(formatter) + "\n");
+                        out.flush();
                     }
                 }
                 case "3" -> {
