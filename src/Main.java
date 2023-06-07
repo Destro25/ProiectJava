@@ -310,47 +310,58 @@ public class Main {
                 }
                 case "8" -> {
                     if (service.getAccountId() != 0) {
-                        service.showAccountProducts();
-                        System.out.println("Those are the items you have in your inventory!");
-                        System.out.println("Please select an id of an item you would like to sell, or 0 to go back.");
+                        int prods = service.showAccountProducts();
+                        if (prods > 0)
+                        {
+                            System.out.println("Those are the items you have in your inventory!");
+                            System.out.println("Please select an id of an item you would like to sell, or 0 to go back.");
 
-                        try {
-                            int id = Integer.parseInt(scanner.next());
+                            try {
+                                int id = Integer.parseInt(scanner.next());
 
-                            if (id != 0) {
-                                System.out.println("The creator of the collection will get 7% of the asking price, and the market will get 3%.");
-                                System.out.println("Choose a price for the item: ");
+                                if (id != 0) {
+                                    System.out.println("The creator of the collection will get 7% of the asking price, and the market will get 3%.");
+                                    System.out.println("Choose a price for the item: ");
 
-                                float pret = Float.parseFloat(scanner.next());
+                                    float pret = Float.parseFloat(scanner.next());
 
-                                if (pret > 0f) {
-                                    service.sellAccountProduct(id, pret);
-                                    out.write("Operatiune 8" + " " + LocalDateTime.now().format(formatter) + "\n");
-                                    out.flush();
-                                } else {
-                                    System.out.println("The price cannot be negative!");
+                                    if (pret > 0f) {
+                                        service.sellAccountProduct(id, pret);
+                                        out.write("Operatiune 8" + " " + LocalDateTime.now().format(formatter) + "\n");
+                                        out.flush();
+                                    } else {
+                                        System.out.println("The price cannot be negative!");
+                                    }
                                 }
+                            } catch (RuntimeException e) {
+                                System.out.println("There has been a problem putting your item for sale! Check the item id and the price.");
                             }
-                        } catch (RuntimeException e) {
-                            System.out.println("There has been a problem putting your item for sale! Check the item id and the price.");
+                        }else
+                        {
+                            System.out.println("You have no products currently.");
                         }
+
                     } else {
                         System.out.println("Please create an account, or login!");
                     }
                 }
                 case "9" -> {
                     if (service.getAccountId() != 0) {
-                        service.showMarketProducts();
-                        System.out.println("Please choose the id of the item you would like to buy, or 0 to go back: ");
+                        int prods = service.showMarketProducts();
+                        if(prods > 0)
+                        {
+                            System.out.println("Please choose the id of the item you would like to buy, or 0 to go back: ");
 
-                        try {
-                            Integer id = Integer.parseInt(scanner.next());
-                            service.buyTheItem(id);
-                            out.write("Operatiune 9" + " " + LocalDateTime.now().format(formatter) + "\n");
-                            out.flush();
-                        } catch (RuntimeException e) {
-                            System.out.println("The id you introduced is invalid!");
+                            try {
+                                Integer id = Integer.parseInt(scanner.next());
+                                service.buyTheItem(id);
+                                out.write("Operatiune 9" + " " + LocalDateTime.now().format(formatter) + "\n");
+                                out.flush();
+                            } catch (RuntimeException e) {
+                                System.out.println("The id you introduced is invalid!");
+                            }
                         }
+
                     } else {
                         System.out.println("Please create an account, or login!");
                     }
@@ -361,13 +372,13 @@ public class Main {
                         out.write("Operatiune 10" + " " + LocalDateTime.now().format(formatter) + "\n");
                         out.flush();
                     } else {
-                        command = "12";
+                        command = "-1";
                     }
                 }
-                case "11" -> command = "12";
+                case "11" -> command = "-1";
                 default -> System.out.println("Command not recognized. Returning to main menu.");
             }
-        }   while (!command.equals("12"));
+        }   while (!command.equals("-1"));
 
         scanner.close();
         System.out.println("Goodbye!");

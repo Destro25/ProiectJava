@@ -428,18 +428,22 @@ public class Service {
         }
     }
 
-    public void showAccountProducts()
+    public Integer showAccountProducts()
     {
+        int prods = 0;
+
         for(Customer c : m.customers)
         {
             if (c.getAccountId() == accountId)
             {
                 for (Product p : c.getProductsInventory())
                 {
+                    prods++;
                     System.out.println(p);
                 }
             }
         }
+        return prods;
     }
 
     public void sellAccountProduct(Integer id, Float pret)
@@ -468,13 +472,22 @@ public class Service {
         }
     }
 
-    public void showMarketProducts()
+    public int showMarketProducts()
     {
+        int prods = m.productsForPurchase.size();
         Collections.sort(m.productsForPurchase);
-        for (Product p : m.productsForPurchase)
+        if(prods > 0)
         {
-            System.out.println(p + " cost: " + p.getPrice().toString());
+            for (Product p : m.productsForPurchase)
+            {
+                System.out.println(p + " cost: " + p.getPrice().toString());
+            }
         }
+        else
+        {
+            System.out.println("There are no items on the market currently!");
+        }
+        return prods;
     }
 
     public void buyTheItem(Integer id)
